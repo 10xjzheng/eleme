@@ -147,7 +147,7 @@ class Eleme
             curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
         }
         if($type == 'put') {
-            curl_setopt($ch, CURLOPT_POST, 0);//post提交方式
+            curl_setopt($ch, CURLOPT_POST, 0);//put提交方式
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
         }
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
