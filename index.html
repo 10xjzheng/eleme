@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://www.elemhb.top/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>饿了么 · 一键领取手气最佳红包</title>
+  <link rel="shortcut icon" href="http://www.elemhb.top/icon.png">
+  <link href="./eleme/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .panel {
+      width: 375px;
+      margin: 15px auto;
+    }
+
+    .breadcrumb {
+      margin-bottom: 0;
+    }
+
+    #submit {
+      width: 100%;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    #track {
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 10px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .panel {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="panel panel-default">
+    <div class="panel-heading">饿了么 · 一键领取手气最佳红包</div>
+    <div class="panel-body">
+      <div class="form-group">
+        <label for="mobile">要领取最佳红包的手机号码</label>
+        <input type="mobile" class="form-control" id="mobile" placeholder="11位手机号码">
+      </div>
+      <div class="form-group">
+        <label for="url">饿了么分享出来的红包链接</label>
+        <input type="text" class="form-control" id="url" placeholder="https://h5.ele.me/hongbao/开头的链接">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-danger" id="submit">马上领取</button>
+      </div>
+      <ul class="breadcrumb">
+        <li>
+          <a href="javascript:;" data-toggle="modal" data-target="#wx-group-modal">饿了么红包分享群</a>
+        </li>
+        <li>
+          <a href="https://github.com/game-helper/eleme/issues/new" target="_blank">反馈问题</a>
+        </li>
+        <li>
+          <a href="https://github.com/game-helper/donate" target="_blank">捐赠我们</a>
+        </li>
+      </ul>
+      <div>
+        <pre><b>如何获取拼手气红包？</b><br>好友下单后，分享到群里的红包<br>饿了么 APP 买过的订单点进去，分享红包</pre>
+        <pre><b>如何复制红包链接？</b><br>分享到 QQ，选择 “我的电脑”，PC 版 QQ 复制链接<br>分享到微信，PC 版微信右键用浏览器打开，复制链接</pre>
+        <pre>春节暂停更新，祝大家狗年大吉吧<br>截止到 2018年02月12日10点，百度统计数据如下</pre>
+        <a href="./eleme/track.png" target="_blank"><img id="track" src="./eleme/track.png" alt=""></a>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="wx-group-modal" tabindex="-1" role="dialog" aria-labelledby="wx-group-modal-label">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+          <h4 class="modal-title">微信-饿了么红包分享群</h4>
+        </div>
+        <div class="modal-body">
+          <img src="./eleme/wx-group.png" alt="微信-饿了么红包分享群">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./eleme/push.js"></script><script src="./eleme/hm.js"></script><script src="./eleme/jquery.min.js"></script>
+  <script src="./eleme/bootstrap.min.js"></script>
+
+  <script>
+    var _hmt = _hmt || [];
+    (function () {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ec94314b337fdff17cf09e9040847912";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+
+  </script>
+
+  <script>
+    $('#submit').on('click', function (e) {
+      var $submit = $(this)
+      $submit.text('正在领取...').prop('disabled', true)
+      $.post('/main.php', {
+          url: $.trim($('#url').val()),
+          mobile: $.trim($('#mobile').val())
+        })
+        .always(function () {
+          $submit.text('马上领取').prop('disabled', false)
+        })
+        .done(function (res) {
+          alert(res.message);
+        })
+        .fail(function (err) {
+          alert('服务器繁忙，请稍后重试')
+        })
+    })
+
+    $('.breadcrumb a').on('click', function (e) {
+      _hmt.push(['_trackEvent', $(this).text(), 'click'])
+    })
+
+  </script>
+
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-113694257-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-113694257-1');
+
+  </script>
+
+  <script>
+    (function () {
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      } else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+
+  </script>
+
+
+
+<audio controls="controls" style="display: none;"></audio></body><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></html>
