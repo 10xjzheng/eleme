@@ -49,17 +49,14 @@ class Eleme
             if(empty($urlParams['sn']) || empty($urlParams['lucky_number'])) {
                 throw new \Exception('领取饿了么红包链接不正确');
             }
-            $leftNumber = $urlParams['lucky_number'];
-            $index = 0;
-            while ($leftNumber) {
+            $index = 9;//最多就10个红包
+            while ($index) {
                 $phone = empty($phone) ? '138' . rand(10000000, 99999999) : $phone;//构造假的手机号码
                 $result = $this->receive(self::$cookies[$index], $urlParams, $phone);
                 if(empty($result['promotion_records'])) {
                     throw new \Exception('errors' . print_r($result, true));
                 }
                 $leftNumber = $urlParams['lucky_number'] - count($result['promotion_records']);
-                $index++;
-                $index = $index > 9 ? 0 : $index;
                 if($leftNumber <= 0) {
                     $luckyOne = $result['promotion_records'][$urlParams['lucky_number']-1];
                     $res = ['status' => 0, 'message' => '最佳手气: ' . $luckyOne['sns_username'] . "\n红包金额: " . $luckyOne['amount']];
@@ -69,6 +66,7 @@ class Eleme
                 } else {
                     unset($phone);
                 }
+                $index--;
             }
         } catch(\Exception $e) {
             $res = ['status' => 0, 'message' => $e->getMessage()];
